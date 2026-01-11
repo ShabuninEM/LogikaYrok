@@ -1,0 +1,171 @@
+     <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Логика в информатике: Высказывания и логические связки</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(to bottom, #e0f7fa, #ffffff); color: #333; }
+        .slide { max-width: 1200px; margin: 0 auto 40px; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: none; }
+        .slide.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        h1, h2 { color: #0277bd; text-align: center; }
+        .example { background: #f0f8ff; padding: 15px; border-left: 5px solid #0277bd; margin: 10px 0; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 2px solid #0277bd; padding: 12px; text-align: center; font-size: 18px; }
+        .true { background: #c8e6c9; color: #2e7d32; font-weight: bold; }
+        .false { background: #ffcdd2; color: #c62828; font-weight: bold; }
+        button { background: #0277bd; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 10px; transition: background 0.3s; }
+        button:hover { background: #01579b; }
+        .hidden { display: none; }
+        .task-input { width: 100%; height: 100px; margin: 10px 0; padding: 10px; border: 2px solid #0277bd; border-radius: 8px; font-size: 16px; }
+        .nav { text-align: center; margin: 20px 0; }
+        .logic-op { font-size: 24px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button onclick="showSlide(1)">Приветствие</button>
+        <button onclick="showSlide(2)">Актуализация</button>
+        <button onclick="showSlide(3)">Новое</button>
+        <button onclick="showSlide(4)">Закрепление</button>
+        <button onclick="showSlide(5)">Кроссворд</button>
+        <button onclick="showSlide(6)">Итоги</button>
+    </div>
+
+    <!-- Слайд 1: Приветствие -->
+    <div id="slide1" class="slide active">
+        <h1>Добро пожаловать на урок логики!</h1>
+        <p style="font-size: 24px; text-align: center;">Проверьте: у вас есть ручка, тетрадь и хорошее настроение?</p>
+        <button onclick="showSlide(2)">Начать урок!</button>
+    </div>
+
+    <!-- Слайд 2: Актуализация -->
+    <div id="slide2" class="slide">
+        <h2>Почему логика важна?</h2>
+        <p>Вы часто слышите: "Если ты сделаешь уроки, то сможешь погулять" или "Сегодня холодно, поэтому я надену шапку". Мы связываем мысли воедино.</p>
+        <p>Информатика изучает правильное мышление с помощью логики. Давайте начнем!</p>
+        <button onclick="showSlide(3)">Далее: Что такое высказывание?</button>
+    </div>
+
+    <!-- Слайд 3: Новое -->
+    <div id="slide3" class="slide">
+        <h2>Понятие высказывания</h2>
+        <p>Высказывание — это предложение, про которое можно однозначно сказать: истинно (И) или ложно (Л).</p>
+        <div class="example">
+            <strong>Истинное:</strong> «Снег белый» (И)<br>
+            <strong>Ложное:</strong> «2 + 2 = 5» (Л)<br>
+            <strong>Не высказывание:</strong> «Какого цвета шарф?» (вопрос), «Посмотри на улицу» (повеление).
+        </div>
+        <p>И = 1 (истинно), Л = 0 (ложно).</p>
+
+        <h3>Логические связки</h3>
+        <p>Простые высказывания объединяем в сложные.</p>
+
+        <h4>НЕ (¬, not)</h4>
+        <p>Меняет на противоположное. Пример: A = «Идет снег» (И) → НЕ A = «Не идет снег» (Л).</p>
+        <button onclick="toggleTruth('not')">Таблица истинности НЕ</button>
+        <table id="not" class="hidden">
+            <tr><th>A</th><th>НЕ A</th></tr>
+            <tr><td>И</td><td class="false">Л</td></tr>
+            <tr><td>Л</td><td class="true">И</td></tr>
+        </table>
+
+        <h4>И (∧, and)</h4>
+        <p>Истинно, только если оба истинны. Пример: «Морозно И светит солнце».</p>
+        <button onclick="toggleTruth('and')">Таблица истинности И</button>
+        <table id="and" class="hidden">
+            <tr><th>A</th><th>B</th><th>A И B</th></tr>
+            <tr><td>И</td><td>И</td><td class="true">И</td></tr>
+            <tr><td>И</td><td>Л</td><td class="false">Л</td></tr>
+            <tr><td>Л</td><td>И</td><td class="false">Л</td></tr>
+            <tr><td>Л</td><td>Л</td><td class="false">Л</td></tr>
+        </table>
+
+        <h4>ИЛИ (∨, or)</h4>
+        <p>Истинно, если хотя бы одно истинно. Пример: «Купить ИЛИ сделать подарок».</p>
+        <button onclick="toggleTruth('or')">Таблица истинности ИЛИ</button>
+        <table id="or" class="hidden">
+            <tr><th>A</th><th>B</th><th>A ИЛИ B</th></tr>
+            <tr><td>И</td><td>И</td><td class="true">И</td></tr>
+            <tr><td>И</td><td>Л</td><td class="true">И</td></tr>
+            <tr><td>Л</td><td>И</td><td class="true">И</td></tr>
+            <tr><td>Л</td><td>Л</td><td class="false">Л</td></tr>
+        </table>
+
+        <button onclick="showSlide(4)">Далее: Упражнения</button>
+    </div>
+
+    <!-- Слайд 4: Закрепление -->
+    <div id="slide4" class="slide">
+        <h2>Упражнение 1: Что является высказыванием?</h2>
+        <ul>
+            <li>Москва — столица России. (<button onclick="alert('Да, И')">Проверить</button>)</li>
+            <li>Решите уравнение: x + 5 = 10. (<button onclick="alert('Нет (повеление)')">Проверить</button>)</li>
+            <li>Все кошки серые. (<button onclick="alert('Да, Л')">Проверить</button>)</li>
+            <li>Сегодня вторник. (<button onclick="alert('Да, И или Л (проверьте дату)')">Проверить</button>)</li>
+        </ul>
+
+        <h3>Упражнение 2</h3>
+        <p>A = «Каникулы начались» (И), B = «Я поеду к бабушке» (И), C = «На улице дождь» (Л).</p>
+        <ul>
+            <li>НЕ C = «На улице не дождь» → <span class="true">И</span></li>
+            <li>A И B → <span class="true">И</span></li>
+            <li>B ИЛИ C → <span class="true">И</span> (B истинно)</li>
+        </ul>
+        <button onclick="showSlide(5)">Далее: Новогодний кроссворд</button>
+    </div>
+
+    <!-- Слайд 5: Кроссворд -->
+    <div id="slide5" class="slide">
+        <h2>Новогодний логический кроссворд</h2>
+        <p>Составьте высказывание о новогодних каникулах с 3 простыми (A, B, C) и 2 связками (И, ИЛИ, НЕ).</p>
+        <p><strong>Пример:</strong><br>
+        A = «Я видел салют» (И)<br>
+        B = «Я ел мандарины» (И)<br>
+        C = «Я катался на коньках» (Л)<br>
+        Формула: (A И B) ИЛИ (НЕ C) = И</p>
+
+        <table>
+            <tr><th>Высказывание</th><th>Значение</th></tr>
+            <tr><td>A</td><td>И</td></tr>
+            <tr><td>B</td><td>И</td></tr>
+            <tr><td>C</td><td>Л</td></tr>
+            <tr><td>Сложное</td><td class="true">И</td></tr>
+        </table>
+
+        <p>Ваше задание:</p>
+        <textarea class="task-input" placeholder="Напишите A, B, C, формулу и таблицу..."></textarea>
+        <button onclick="alert('Отлично! Запишите на листе и сдайте.')">Проверить готовность</button>
+        <button onclick="showSlide(6)">Итоги</button>
+    </div>
+
+    <!-- Слайд 6: Итоги -->
+    <div id="slide6" class="slide">
+        <h2>Подведение итогов</h2>
+        <p><strong>Высказывание:</strong> Предложение с истинностью И/Л.</p>
+        <p><strong>Связки:</strong> НЕ (меняет), И (оба истинны), ИЛИ (хотя бы одно).</p>
+        <p>Что было самым простым/сложным? Где пригодится в жизни?</p>
+        <h3>Домашнее задание</h3>
+        <ul>
+            <li>§ учебника по теме.</li>
+            <li>Сделайте кроссворд (если не успели).</li>
+            <li>Придумайте 2-3 высказывания о школьной жизни.</li>
+        </ul>
+    </div>
+
+    <script>
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+        }
+        function toggleTruth(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+        // Показать первый слайд
+        showSlide(1);
+    </script>
+</body>
+</html>
+
